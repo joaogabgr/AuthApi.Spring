@@ -12,7 +12,6 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-
 @Service
 public class TokenService {
     @Value("${jwt.secret")
@@ -22,8 +21,8 @@ public class TokenService {
         try{
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
-                    .withIssuer("transparency-portal")
-                    .withSubject(user.getUsername())
+                    .withIssuer("auth-api")
+                    .withSubject(user.getPayload())
                     .withExpiresAt(genExpirationDate())
                     .sign(algorithm);
             return token;
