@@ -66,6 +66,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           throw new Error("Token expirado");
         }
         const jsonUserInfo = JSON.parse(decodedToken.sub);
+        api.defaults.headers["Authorization"] = `Bearer ${token}`;
         setUser(jsonUserInfo);
         setIsAuthenticated(true);
       } catch (error) {
